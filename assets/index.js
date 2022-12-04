@@ -59,3 +59,26 @@ function weather(dataCity, dt, lat, long, apiKey) {
         }
     });
 }
+
+function displayWeather (city) {
+    let dateEl = document.createElement('h2')
+    dateEl.innerText =(namedCities[city].today.date).substr(0, 10)
+    document.getElementById("today").appendChild(dateEl)
+
+    // let imageEl = document.createElement('img')
+    // imageEl.src = namedCities[city].today.icon
+    // dateEl.append(imageEl);
+
+    let tempEl = document.createElement('h3')
+    tempEl.innerText ="Temp: " + namedCities[city].today.temp + " Fahrenheit"
+    document.getElementById("today").appendChild(tempEl)
+
+    let windEl = document.createElement('h3')
+    windEl.innerText ="Wind: " + namedCities[city].today.temp + " MPH"
+    document.getElementById("today").appendChild(windEl)
+
+    let humidityEl = document.createElement('h3')
+    humidityEl.innerText ="Humidity: " + namedCities[city].today.temp + " %"
+    document.getElementById("today").appendChild(humidityEl)
+ 
+}
