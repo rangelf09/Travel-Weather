@@ -35,7 +35,7 @@ function weather(dataCity, dt, lat, lon, apiKey) {
             response.json().then(function(data) {
                 console.log(data)
                 city.today = {
-                    data: String(new Date(dt * 1000)),
+                    date: String(new Date(dt * 1000)),
                     // icon: dataCity.current.weather[0].icon,
                     temp: data.current.temp,
                     wind: data.current.wind_speed,
@@ -44,7 +44,7 @@ function weather(dataCity, dt, lat, lon, apiKey) {
                 // for the week forecast
                 for (i = 1; i < 6; i++) {
                     city.forecast[i] = {
-                        dat: String(new Date (data.daily[i].dt * 1000)),
+                        date: String(new Date (data.daily[i].dt * 1000)),
                         icon: data.daily[i].weather[0].icon,
                         temp: data.daily[i].temp.day,
                         wind: data.daily[i].wind_speed,
@@ -61,7 +61,7 @@ function weather(dataCity, dt, lat, lon, apiKey) {
 
 function displayWeather (city) {
     let dateEl = document.createElement('h2')
-    dateEl.innerText =(city.today)
+    dateEl.innerText =(city.today.date).substr(0, 10)
     document.getElementById("today").appendChild(dateEl)
 
     // let imageEl = document.createElement('img')
@@ -83,5 +83,26 @@ function displayWeather (city) {
 
 
     // forecast
- 
+ for (var i = 1; i < 6; i++) {
+    let spanEl =  document.createElement ('span')
+    spanEl.innerText = (city.forecast[i].date).substr(0, 10)
+    document.querySelector(".day" + i).appendChild(spanEl)
+
+    // let iconEl = document.createElement("img")
+    // iconEl.src =(city.today.icon)
+    // document.querySelector(".day" + i).appendChild(iconEl)
+
+    let tempEl =  document.createElement ('span')
+    tempEl.innerText = (city.forecast[i].temp + "Fahrenheit")
+    document.querySelector(".day" + i).appendChild(tempEl)
+
+    let windEl =  document.createElement ('span')
+    windEl.innerText = (city.forecast[i].wind + "MPH")
+    document.querySelector(".day" + i).appendChild(windEl)
+
+    let humidityEl =  document.createElement ('span')
+    humidityEl.innerText = (city.forecast[i].humidity + "%")
+    document.querySelector(".day" + i).appendChild(humidityEl)
+
 }
+ }
